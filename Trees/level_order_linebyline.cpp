@@ -1,60 +1,63 @@
 #include<bits/stdc++.h>
+#include<unordered_set>
+#include<unordered_map>
 using namespace std;
 
-struct treenode
-{
+struct node{
     int data;
-    treenode *left;
-    treenode *right;
+    node *left;
+    node *right;
 
-    treenode(int data)
+    node(int x)
     {
-        this->data = data;
+        data = x;
         left = right = NULL;
     }
 };
 
-
-void print_level(treenode* root){
-    if (root == NULL)
-    {
-        return;
-    }
-    queue<treenode*> q;
+void line_trav(node *root)
+{   
+    if(root == NULL) return;
+    queue<node*>q;
     q.push(root);
     q.push(NULL);
-    while (q.size() > 1)
+
+    while(q.size() > 1)
     {
-        treenode *curr = q.front();
+        node *curr = q.front();
         q.pop();
-        if (curr == NULL)
+
+         if (curr == NULL)
         {
-            cout << endl;
+            cout << "\n";
             q.push(NULL);
-            continue;
+            continue;  // this is for going to next iteration and not check left, right and printing NULL
         }
-        cout << curr-> data << " ";
+        
+        
+        cout << curr -> data << " "; // i tried to remove continue and pur a if block curr != NUll but that is 
+        // only printing 10 over here
         if (curr -> left != NULL)
         {
             q.push(curr -> left);
         }
+        
         if (curr -> right != NULL)
         {
             q.push(curr -> right);
-        }   
+        }  
     }
 }
-
 int main()
 {
-    treenode *root = new treenode(10);
-    root->left = new treenode(20);
-    root->left->left = new treenode(40);
-    root->left->right = new treenode(50);
-    root->left->right->left = new treenode(70);
-    root->left->right->right = new treenode(80);
-    root->right = new treenode(30);
-    root->right->right = new treenode(60);
-    print_level(root);
-    return 0;
+node *root = new node(10);
+root -> left =  new node(20);
+root -> right = new node(30);
+root -> left -> left = new node(40);
+root -> left -> right = new node(60);
+root -> right -> left = new node(70);
+root -> right -> right = new node(50); 
+
+line_trav(root);
+return 0;
 }

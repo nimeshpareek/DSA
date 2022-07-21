@@ -15,15 +15,14 @@ struct treenode{
 };
 
 void print_tree(treenode *root){
-treenode *temp = root;
-if (temp == NULL)
+if (root == NULL)
 {
     return;
 }
 
-cout << temp-> data << " ";
-print_tree(temp -> left);
-print_tree(temp-> right);
+cout << root-> data << " ";
+print_tree(root -> left);
+print_tree(root-> right);
 }
 int main()
 {
